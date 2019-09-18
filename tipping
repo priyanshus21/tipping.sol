@@ -1,0 +1,54 @@
+pragma solidity >=0.4.22 <0.6.0;
+
+contract tipping {
+    
+    string public option1="Good";       //
+    string public option2="Average";    //
+    string public option3="Bad";        //
+    string public getreview;
+     uint public tipAmount;
+     bool public  Tipbool;
+     uint public amount;
+     uint public pay;
+     
+     //function ()
+     //{
+         
+     //}
+     
+     function setPay(uint nm) public {
+        amount = nm;
+    }
+    
+    function setTip(bool x) public {
+       Tipbool=x;
+    }
+    
+    function setreview(string memory review) public{
+        getreview=review;
+    }
+  
+    function aftertip() public {
+        if (Tipbool == true )
+        {
+            if (keccak256(abi.encodePacked(option1)) == keccak256(abi.encodePacked((getreview))))
+            {
+                tipAmount=amount * 15/100;
+            }
+            else if (keccak256(abi.encodePacked(option2)) == keccak256(abi.encodePacked((getreview))))
+            {
+                tipAmount=amount * 1/10;
+            }
+            
+            else if (keccak256(abi.encodePacked(option3)) == keccak256(abi.encodePacked((getreview))))
+            {
+                tipAmount=amount * 5/100;
+            }
+            
+            pay = tipAmount + amount;
+        }
+        
+        else if ( Tipbool == false ) pay=amount;
+        
+    }
+}
